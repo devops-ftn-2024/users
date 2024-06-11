@@ -21,6 +21,10 @@ app.use(bodyParser.urlencoded());
 
 // upload profile image - slika se zove po id-ju/username
 
+app.get('/users/health', (req, res) => {
+    return res.status(200).json({message: "Hello, World!"});
+})
+
 app.get('/users/profile', async (req, res) => {
     console.log("Get user profile");
     const userData = req.headers.user;

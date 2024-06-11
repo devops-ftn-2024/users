@@ -11,12 +11,11 @@ on:
       - main
 
 env:
-  IMAGE_NAME: accommodatio-auth
+  IMAGE_NAME: accommodatio-users
 
 jobs:
   build:
     name: Build Docker image
-    if: false
     runs-on: ubuntu-latest
 
     steps:
