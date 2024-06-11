@@ -14,7 +14,7 @@ services:
     ports:
       - "3002:3002"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001/users/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3002/users/health"]
       interval: 10s
       timeout: 5s
       retries: 3
