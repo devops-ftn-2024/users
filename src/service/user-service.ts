@@ -1,6 +1,6 @@
 import { UserRepository } from "../repository/user-repository";
-import { BadRequestError, NotFoundError } from "../types/errors";
-import { UpdatableUser, User } from "../types/user";
+import { BadRequestError, InternalServerError, NotFoundError } from "../types/errors";
+import { UpdatableUser, User, UsernameDTO } from "../types/user";
 import { validateUser } from "../util/validation";
 
 export class UserService {
@@ -43,6 +43,17 @@ export class UserService {
         }
         if (updateResult.modifiedCount === 0) {
             throw new NotFoundError('User not modified');
+        }
+    }
+
+    public async updateUsername(usernames: UsernameDTO) {
+        const { oldUsername, newUsername } = usernames;
+        const updateResult =  await this.repository.updateUsername(oldUsername, newUsername);
+        if (updateResult.matchedCount === 0) {
+            throw new NotFoundError('User not found');
+        }
+        if (updateResult.modifiedCount === 0) {
+            throw new InternalServerError('User not modified');
         }
     }
 }

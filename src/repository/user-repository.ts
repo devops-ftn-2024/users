@@ -57,5 +57,12 @@ export class UserRepository {
         await this.collection.deleteOne({ username });
         await this.client.close();
     }
+
+    public async updateUsername(oldUsername: string, newUsername: string): Promise<UpdateResult<User>> {
+        await this.client.connect();
+        const updateResult = await this.collection.updateOne({ username: oldUsername }, { $set: { username: newUsername } });
+        await this.client.close();
+        return updateResult;
+    }
    
 }

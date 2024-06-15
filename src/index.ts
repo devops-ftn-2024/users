@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import { LoggedUser } from './types/user';
 import { CustomError, NotFoundError } from './types/errors';
 import cors from 'cors';
+import { EventQueue } from './gateway/event-queue';
 require('dotenv').config();
 
 const app = express();
@@ -15,6 +16,7 @@ const corsOptions = {
 };
 
 const userService = new UserService();
+new EventQueue(userService);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -60,10 +62,10 @@ app.delete('/users/:username', (req, res) => {
 });
 
 // preko rabbit mq
-app.post('/users', (req, res) => {
-    userService.addUser(req.body);
-    res.status(201).send();
-});
+// app.post('/users', (req, res) => {
+//     userService.addUser(req.body);
+//     res.status(201).send();
+// });
 
 app.use(cors(corsOptions));
 
