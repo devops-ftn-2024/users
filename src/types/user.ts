@@ -1,5 +1,5 @@
 export interface User {
-    _id: string;
+    _id?: string;
     username: string;
     firstName: string;
     lastName: string;
@@ -18,6 +18,11 @@ export interface LoggedUser {
 }
 
 export enum Role {
-    HOST = 'HOST',
-    GUEST = 'GUEST',
+    HOST = 'Host',
+    GUEST = 'Guest',
+}
+
+export interface UsernameDTO {
+    oldUsername: string;
+    newUsername: string;
 }
