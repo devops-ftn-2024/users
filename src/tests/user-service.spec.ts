@@ -1,9 +1,9 @@
-import { UserRepository } from "../../src/repository/user-repository";
-import { UserService } from "../../src/service/user-service";
-import { BadRequestError, InternalServerError, NotFoundError } from "../../src/types/errors";
+import { UserRepository } from "../repository/user-repository";
+import { UserService } from "../service/user-service";
+import { BadRequestError, InternalServerError, NotFoundError } from "../types/errors";
 import { jest, test } from '@jest/globals';
 
-jest.mock('../../src/repository/user-repository');
+jest.mock('../repository/user-repository');
 
 describe('UserService', () => {
     let service;
