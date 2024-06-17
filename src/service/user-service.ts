@@ -15,8 +15,6 @@ export class UserService {
             throw new NotFoundError('Username not provided');
         }
         const user =  await this.repository.getUser(username);
-        console.log(username);
-        console.log(user);
         if (!user) {
             throw new NotFoundError('User not found');
         }
