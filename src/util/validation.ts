@@ -1,19 +1,26 @@
+import { BadRequestError } from "../types/errors";
 import { User } from "../types/user";
+import { Logger } from "./logger";
 
 export const validateUser = (user: User) => {
     if (!user) {
-        throw new Error("Missing user");
+        Logger.error("BadRequestError: Missing user");
+        throw new BadRequestError("Missing user");
     }
     if (!user.username) {
-        throw new Error("Missing username");
+        Logger.error("BadRequestError: Missing username");
+        throw new BadRequestError("Missing username");
     }
     if (!user.firstName) {
-        throw new Error("Missing first name");
+        Logger.error("BadRequestError: Missing first name");
+        throw new BadRequestError("Missing first name");
     }
     if (!user.lastName) {
-        throw new Error("Missing last name");
+        Logger.error("BadRequestError: Missing last name");
+        throw new BadRequestError("Missing last name");
     }
     if (!user.address) {
-        throw new Error("Missing address");
+        Logger.error("BadRequestError: Missing address");
+        throw new BadRequestError("Missing address");
     }
 }

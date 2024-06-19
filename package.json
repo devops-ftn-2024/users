@@ -34,11 +34,20 @@
         "typescript": "^5.4.5"
     },
     "dependencies": {
+        "@chankamlam/express-jaeger": "^1.1.29",
         "amqplib": "^0.10.4",
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
         "express": "^4.19.2",
+        "express-prometheus-middleware": "^1.2.0",
+        "fs": "^0.0.1-security",
+        "i": "^0.3.7",
         "mongodb": "^6.7.0",
+        "npm": "^10.8.1",
+        "os-utils": "^0.0.14",
+        "path": "^0.12.7",
+        "prom-client": "^13.2.0",
+        "systeminformation": "^5.22.11",
         "ts-node": "^10.9.2"
     },
     "jest": {
