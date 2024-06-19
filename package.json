@@ -35,6 +35,7 @@
     },
     "dependencies": {
         "@chankamlam/express-jaeger": "^1.1.29",
+        "@types/os-utils": "^0.0.4",
         "amqplib": "^0.10.4",
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
