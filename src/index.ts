@@ -10,7 +10,6 @@ import prometheusMiddleware from 'express-prometheus-middleware';
 import promClient from 'prom-client';
 import osUtils from 'os-utils';
 import si from 'systeminformation';
-import jaeger from "@chankamlam/express-jaeger";
 require('dotenv').config();
 
 const app = express();
@@ -26,24 +25,7 @@ new EventQueue(userService);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const config = {
-  serviceName: 'user-service',
-  sampler: {
-      type: "const",
-      param: 1
-  },
-  reporter: {
-      collectorEndpoint: process.env.JAEGER_ENDPOINT
-  },
-};                                                    
-
-app.use(jaeger(config, {} ,(req,res)=>{
-   const jaeger = req.jaeger
-   jaeger.setTag("route",req.path)
-   jaeger.setTag("body",req.body)
-   jaeger.setTag("query",req.query)
-}));
+                                                 
 
 app.use(prometheusMiddleware({
   metricsPath: '/metrics',
