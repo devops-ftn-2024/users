@@ -37,6 +37,17 @@ export class UserService {
         Logger.log(`User with username ${user.username} added`)
     }
 
+    public async getUser(username: string) {
+        Logger.log(`Getting user with username: ${username}`);
+        const user =  await this.repository.getUser(username);
+        if (!user) {
+            Logger.error("User not found");
+            throw new NotFoundError('User not found');
+        }
+        Logger.log(`User with username ${username} found`)
+        return user;
+    }
+
     public async updateUser(username: string, user: UpdatableUser) {
         Logger.log(`Updating user with username: ${username}`);
         const { firstName, lastName, address } = user;
