@@ -166,6 +166,17 @@ app.get('/users/profile', async (req, res) => {
     }
 });
 
+app.get('/users/:username', async (req, res) => {
+  Logger.log(`Getting user with username: ${req.params.username}`);
+  try {
+    const user = await userService.getUser(req.params.username);
+    return res.json(user);
+  } catch (err) {
+    const code = err instanceof CustomError ? err.code : 500;
+    return res.status(code).json({ message: (err as Error).message });
+  }
+});
+
 app.patch('/users/:username', async (req, res) => {
   Logger.log(`Updating user with username: ${req.params.username}`);
   try {
