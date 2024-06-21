@@ -81,4 +81,10 @@ export class UserService {
         }
         Logger.log(`Username updated from ${oldUsername} to ${newUsername}`);
     }
+
+    public async addRating(username: string, rating: number) {
+        Logger.log(`Adding rating ${rating} to user with username ${username}`);
+        await this.repository.addRating(username, rating);
+        Logger.log(`Rating ${rating} added to user with username ${username}`);
+    }
 }

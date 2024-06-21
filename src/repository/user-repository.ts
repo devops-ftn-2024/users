@@ -1,5 +1,6 @@
 import { Collection, MongoClient, UpdateResult } from "mongodb";
 import { UpdatableUser, User } from "../types/user";
+import { Logger } from "../util/logger";
 
 export class UserRepository {
     private client: MongoClient;
@@ -24,7 +25,7 @@ export class UserRepository {
     }
     public async addUser(user: User) {
         await this.client.connect();
-        await this.collection.insertOne(user);
+        await this.collection.insertOne({...user, rating: 0, ratingsArray: []});
         await this.client.close();
     }
 
@@ -63,6 +64,19 @@ export class UserRepository {
         const updateResult = await this.collection.updateOne({ username: oldUsername }, { $set: { username: newUsername } });
         await this.client.close();
         return updateResult;
+    }
+
+    public async addRating(username: string, rating: number): Promise<void> {
+        await this.client.connect();
+        const user = await this.collection.findOne({ username });
+        if (!user) {
+            Logger.error("User not found");
+            return;
+        }
+        const ratingsArray = user.ratingsArray || [];
+        ratingsArray.push(rating);
+        const newRating = ratingsArray.reduce((a, b) => a + b, 0) / ratingsArray.length;
+        await this.collection.updateOne({ username }, { $set: { rating: newRating, ratingsArray } });
     }
    
 }
