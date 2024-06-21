@@ -79,6 +79,21 @@ export class EventQueue {
                         }
                     }, { noAck: true });
                 });
+
+                channel.assertQueue('host-review-created', {
+                    durable: false
+                });
+
+                channel.consume('host-review-created', (payload) => {
+                    if (payload != null) {
+                        const rating: {id: string, rating: number} = JSON.parse(payload.content.toString());
+                        Logger.log(`User rating was created: ${JSON.stringify(rating)} for user ${rating.id}`);
+                        this.userService.addRating(rating.id, rating.rating);
+                    }
+                }, {
+                    noAck: true
+                })
+
             });
         });
     }

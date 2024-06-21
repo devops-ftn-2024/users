@@ -4,6 +4,8 @@ export interface User {
     firstName: string;
     lastName: string;
     address: string;
+    rating: number;
+    ratingsArray: number[];
 }
 
 export interface UpdatableUser {
