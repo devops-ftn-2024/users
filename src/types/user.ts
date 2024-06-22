@@ -1,9 +1,11 @@
 export interface User {
-    _id: string;
+    _id?: string;
     username: string;
     firstName: string;
     lastName: string;
     address: string;
+    rating: number;
+    ratingsArray: number[];
 }
 
 export interface UpdatableUser {
@@ -18,6 +20,11 @@ export interface LoggedUser {
 }
 
 export enum Role {
-    HOST = 'HOST',
-    GUEST = 'GUEST',
+    HOST = 'Host',
+    GUEST = 'Guest',
+}
+
+export interface UsernameDTO {
+    oldUsername: string;
+    newUsername: string;
 }
